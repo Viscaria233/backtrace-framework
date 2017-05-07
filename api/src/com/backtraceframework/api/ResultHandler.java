@@ -1,4 +1,4 @@
-package com.backtrackframework.api;
+package com.backtraceframework.api;
 
 import java.util.Collection;
 
@@ -17,5 +17,5 @@ public interface ResultHandler<Storage> {
      * @param storage 可能会用到
      * @param units 可能会用到
      */
-    void onResultFound(int index, Storage storage, Collection<TrackUnit<Storage>> units);
+    void onResultFound(int index, Storage storage, Collection<TraceUnit<Storage>> units);
 }

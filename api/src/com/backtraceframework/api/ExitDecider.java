@@ -1,4 +1,4 @@
-package com.backtrackframework.api;
+package com.backtraceframework.api;
 
 import java.util.Collection;
 

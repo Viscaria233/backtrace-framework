@@ -1,4 +1,4 @@
-package com.backtrackframework.api;
+package com.backtraceframework.api;
 
 import java.util.Stack;
 
@@ -7,14 +7,14 @@ import java.util.Stack;
  * <br/>
  * <br/>
  * 回溯算法的主体<br/>
- * 先调用以下几个方法，最后调用{@link BackTracker#launch()}启动算法
+ * 先调用以下几个方法，最后调用{@link BackTracer#launch()}启动算法
  * <br/>
- * @see BackTracker#setStorage(Storage)
- * @see BackTracker#setTrackUnitIterator(TrackUnitIterator)
- * @see BackTracker#setResultHandler(ResultHandler)
- * @see BackTracker#setExitDecider(ExitDecider)
+ * @see BackTracer#setStorage(Storage)
+ * @see BackTracer#setTraceUnitIterator(TraceUnitIterator)
+ * @see BackTracer#setResultHandler(ResultHandler)
+ * @see BackTracer#setExitDecider(ExitDecider)
  */
-public final class BackTracker<Storage> {
+public final class BackTracer<Storage> {
 
     /**
      * 用来存储数据，比如八皇后中的棋盘，迷宫问题中的迷宫
@@ -24,7 +24,7 @@ public final class BackTracker<Storage> {
     /**
      * 所有回溯单元组成的迭代器<br/>
      */
-    private TrackUnitIterator<Storage> trackUnitIterator;
+    private TraceUnitIterator<Storage> traceUnitIterator;
 
     /**
      * 结果处理器，用来处理找到的结果，比如保存或输出显示<br/>
@@ -37,9 +37,9 @@ public final class BackTracker<Storage> {
     private ExitDecider exitDecider;
 
     /**
-     * @see BackTracker
+     * @see BackTracer
      */
-    public BackTracker() {}
+    public BackTracer() {}
 
     /**
      * 启动回溯算法<br/>
@@ -48,26 +48,26 @@ public final class BackTracker<Storage> {
      */
     public int launch() {
         if (storage == null
-                || trackUnitIterator == null
+                || traceUnitIterator == null
                 || exitDecider == null) {
             return -1;
         }
 
-        Stack<TrackUnit<Storage>> units = new Stack<>();
-        if (!trackUnitIterator.hasNext(storage, units)) {
+        Stack<TraceUnit<Storage>> units = new Stack<>();
+        if (!traceUnitIterator.hasNext(storage, units)) {
             return 0;
         }
 
-        units.push(trackUnitIterator.next(storage, units));
+        units.push(traceUnitIterator.next(storage, units));
         int count = 0;
 
         while (!units.isEmpty()) {
-            TrackUnit<Storage> peek = units.peek();
+            TraceUnit<Storage> peek = units.peek();
             if (peek.hasNextCase(storage)) {
                 peek.nextCase();
                 if (peek.tryCase(storage)) {
-                    if (trackUnitIterator.hasNext(storage, units)) {
-                        units.push(trackUnitIterator.next(storage, units));
+                    if (traceUnitIterator.hasNext(storage, units)) {
+                        units.push(traceUnitIterator.next(storage, units));
                     } else {
                         count++;
                         if (resultHandler != null) {
@@ -91,42 +91,42 @@ public final class BackTracker<Storage> {
     }
 
     /**
-     * 调用{@link BackTracker#launch()}之前，
+     * 调用{@link BackTracer#launch()}之前，
      * 必须设置存储数据
      * @see Storage
      */
-    public BackTracker<Storage> setStorage(Storage storage) {
+    public BackTracer<Storage> setStorage(Storage storage) {
         this.storage = storage;
         return this;
     }
 
     /**
-     * 调用{@link BackTracker#launch()}之前，
+     * 调用{@link BackTracer#launch()}之前，
      * 必须设置迭代器
-     * @see TrackUnitIterator
+     * @see TraceUnitIterator
      */
-    public BackTracker<Storage> setTrackUnitIterator(TrackUnitIterator<Storage> trackUnitIterator) {
-        this.trackUnitIterator = trackUnitIterator;
+    public BackTracer<Storage> setTraceUnitIterator(TraceUnitIterator<Storage> traceUnitIterator) {
+        this.traceUnitIterator = traceUnitIterator;
         return this;
     }
 
     /**
-     * 调用{@link BackTracker#launch()}之前，
+     * 调用{@link BackTracer#launch()}之前，
      * 可以设置结果处理器<br/>
      * 可以显示或保存结果
      * @see ResultHandler
      */
-    public BackTracker<Storage> setResultHandler(ResultHandler<Storage> resultHandler) {
+    public BackTracer<Storage> setResultHandler(ResultHandler<Storage> resultHandler) {
         this.resultHandler = resultHandler;
         return this;
     }
 
     /**
-     * 调用{@link BackTracker#launch()}之前，
+     * 调用{@link BackTracer#launch()}之前，
      * 必须设置结束判定器
      * @see ExitDecider
      */
-    public BackTracker<Storage> setExitDecider(ExitDecider exitDecider) {
+    public BackTracer<Storage> setExitDecider(ExitDecider exitDecider) {
         this.exitDecider = exitDecider;
         return this;
     }

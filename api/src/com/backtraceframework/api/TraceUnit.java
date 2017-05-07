@@ -8,13 +8,13 @@ package com.backtraceframework.api;
  * 马遍历棋盘问题中，回溯单元是马走的每一步，一共有很多个单元<br/>
  * 迷宫问题中，回溯单元是迷宫里的人走的每一步，一共有很多个单元<br/>
  * <br/>
- * 用{@link TrackUnit#hasNextCase(Storage)}判断是否可以向前探测<br/>
- * 用{@link TrackUnit#nextCase()}移动到探测的位置<br/>
- * 用{@link TrackUnit#tryCase(Storage)}尝试向前探测<br/>
- * 不能向前探测时用{@link TrackUnit#rollback(Storage)}恢复探测中被改变的数据
+ * 用{@link TraceUnit#hasNextCase(Storage)}判断是否可以向前探测<br/>
+ * 用{@link TraceUnit#nextCase()}移动到探测的位置<br/>
+ * 用{@link TraceUnit#tryCase(Storage)}尝试向前探测<br/>
+ * 不能向前探测时用{@link TraceUnit#rollback(Storage)}恢复探测中被改变的数据
  *
  */
-public interface TrackUnit<Storage> {
+public interface TraceUnit<Storage> {
     /**=
      * @return 是否可以向前探测
      */
@@ -33,8 +33,8 @@ public interface TrackUnit<Storage> {
     boolean tryCase(Storage storage);
 
     /**
-     * 当{@link TrackUnit#hasNextCase(Storage)}返回 <code>false</code> 时，
-     * 恢复在{@link TrackUnit#tryCase(Storage)}中被改变的数据
+     * 当{@link TraceUnit#hasNextCase(Storage)}返回 <code>false</code> 时，
+     * 恢复在{@link TraceUnit#tryCase(Storage)}中被改变的数据
      * @param storage 存储的数据
      */
     void rollback(Storage storage);
