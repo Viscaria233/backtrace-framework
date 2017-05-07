@@ -1,4 +1,4 @@
-package com.backtrackframework.api;
+package com.backtraceframework.api;
 
 /**
  * Created by Haochen on 2017/4/10.
@@ -14,7 +14,7 @@ package com.backtrackframework.api;
  * 不能向前探测时用{@link TrackUnit#rollback(Storage)}恢复探测中被改变的数据
  *
  */
-public interface TrackUnit {
+public interface TrackUnit<Storage> {
     /**=
      * @return 是否可以向前探测
      */

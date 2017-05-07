@@ -1,13 +1,12 @@
-package com.backtrackframework.demo.queen;
+package com.backtraceframework.demo.queen;
 
-import com.backtrackframework.api.Storage;
-import com.backtrackframework.api.TrackUnit;
+import com.backtraceframework.api.TraceUnit;
 
 /**
  * Created by Haochen on 2017/4/10.
  * TODO:
  */
-public class QueenTrackUnit implements TrackUnit {
+public class QueenTrackUnit implements TraceUnit<Integer[][]> {
 
     private int row;
     private int column = -1;
@@ -17,9 +16,8 @@ public class QueenTrackUnit implements TrackUnit {
     }
 
     @Override
-    public boolean hasNextCase(Storage storage) {
-        int[][] board = (int[][]) storage.get();
-        return column + 1 < board[row].length;
+    public boolean hasNextCase(Integer[][] storage) {
+        return column + 1 < storage[row].length;
     }
 
     @Override
@@ -28,22 +26,20 @@ public class QueenTrackUnit implements TrackUnit {
     }
 
     @Override
-    public boolean tryCase(Storage storage) {
-        int[][] board = (int[][]) storage.get();
-        if (hasConflict(board, row, column)) {
+    public boolean tryCase(Integer[][] storage) {
+        if (hasConflict(storage, row, column)) {
             return false;
         }
-        board[row][column] = 1;
+        storage[row][column] = 1;
         return true;
     }
 
     @Override
-    public void rollback(Storage storage) {
-        int[][] board = (int[][]) storage.get();
-        board[row][column] = 0;
+    public void rollback(Integer[][] storage) {
+        storage[row][column] = 0;
     }
 
-    private boolean hasConflict(int[][] board, int row, int column) {
+    private boolean hasConflict(Integer[][] board, int row, int column) {
         int sum = 0;
         for (int i = 0; i < board.length; ++i) {
             for (int j = 0; j < board[i].length; ++j) {

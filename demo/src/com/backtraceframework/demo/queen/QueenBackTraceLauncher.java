@@ -1,6 +1,6 @@
-package com.backtrackframework.demo.queen;
+package com.backtraceframework.demo.queen;
 
-import com.backtrackframework.api.BackTracker;
+import com.backtraceframework.api.BackTracer;
 
 /**
  * Created by Haochen on 2017/4/10.
@@ -9,9 +9,8 @@ import com.backtrackframework.api.BackTracker;
 public class QueenBackTrackLauncher {
     public static void launch() {
         int queenCount = 8;
-        int count = new BackTracker()
-                .setStorage(new QueenStorage(queenCount))
-                .setTrackUnitIterator(new QueenIterator(queenCount))
+        int count = new BackTracer<Integer[][]>()
+                .setTraceUnitIterator(new QueenIterator(queenCount))
                 .setResultHandler(new QueenResultHandler())
                 .setExitDecider(new QueenExitDecider())
                 .launch();

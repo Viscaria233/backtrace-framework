@@ -14,7 +14,7 @@ import java.util.Stack;
  * @see BackTracker#setResultHandler(ResultHandler)
  * @see BackTracker#setExitDecider(ExitDecider)
  */
-public final class BackTracker {
+public final class BackTracker<Storage> {
 
     /**
      * 用来存储数据，比如八皇后中的棋盘，迷宫问题中的迷宫
@@ -22,14 +22,14 @@ public final class BackTracker {
     private Storage storage;
 
     /**
-     * 所有回溯单元组成的迭代器<br/>=
+     * 所有回溯单元组成的迭代器<br/>
      */
-    private TrackUnitIterator trackUnitIterator;
+    private TrackUnitIterator<Storage> trackUnitIterator;
 
     /**
      * 结果处理器，用来处理找到的结果，比如保存或输出显示<br/>
      */
-    private ResultHandler resultHandler;
+    private ResultHandler<Storage> resultHandler;
 
     /**
      * 结束判定器，找到结果时用来判断是否应该结束算法<br/>
@@ -53,7 +53,7 @@ public final class BackTracker {
             return -1;
         }
 
-        Stack<TrackUnit> units = new Stack<>();
+        Stack<TrackUnit<Storage>> units = new Stack<>();
         if (!trackUnitIterator.hasNext(storage, units)) {
             return 0;
         }
@@ -62,7 +62,7 @@ public final class BackTracker {
         int count = 0;
 
         while (!units.isEmpty()) {
-            TrackUnit peek = units.peek();
+            TrackUnit<Storage> peek = units.peek();
             if (peek.hasNextCase(storage)) {
                 peek.nextCase();
                 if (peek.tryCase(storage)) {
@@ -95,7 +95,7 @@ public final class BackTracker {
      * 必须设置存储数据
      * @see Storage
      */
-    public BackTracker setStorage(Storage storage) {
+    public BackTracker<Storage> setStorage(Storage storage) {
         this.storage = storage;
         return this;
     }
@@ -105,7 +105,7 @@ public final class BackTracker {
      * 必须设置迭代器
      * @see TrackUnitIterator
      */
-    public BackTracker setTrackUnitIterator(TrackUnitIterator trackUnitIterator) {
+    public BackTracker<Storage> setTrackUnitIterator(TrackUnitIterator<Storage> trackUnitIterator) {
         this.trackUnitIterator = trackUnitIterator;
         return this;
     }
@@ -116,7 +116,7 @@ public final class BackTracker {
      * 可以显示或保存结果
      * @see ResultHandler
      */
-    public BackTracker setResultHandler(ResultHandler resultHandler) {
+    public BackTracker<Storage> setResultHandler(ResultHandler<Storage> resultHandler) {
         this.resultHandler = resultHandler;
         return this;
     }
@@ -126,7 +126,7 @@ public final class BackTracker {
      * 必须设置结束判定器
      * @see ExitDecider
      */
-    public BackTracker setExitDecider(ExitDecider exitDecider) {
+    public BackTracker<Storage> setExitDecider(ExitDecider exitDecider) {
         this.exitDecider = exitDecider;
         return this;
     }

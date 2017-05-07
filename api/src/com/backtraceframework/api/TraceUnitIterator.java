@@ -1,4 +1,4 @@
-package com.backtrackframework.api;
+package com.backtraceframework.api;
 
 import java.util.Collection;
 
@@ -11,7 +11,7 @@ import java.util.Collection;
  * 用{@link TrackUnitIterator#next(Storage, Collection)}获取下一个，
  * 一般应该创建一个新的 <code>TrackUnit</code> 对象<br/>
  */
-public interface TrackUnitIterator {
+public interface TrackUnitIterator<Storage> {
     /**
      * 判断是否有下一个{@link TrackUnit}
      * @param storage 存储的数据<br/>
@@ -22,12 +22,12 @@ public interface TrackUnitIterator {
      *                即棋盘上所有位置都被走过时返回<code>false</code><br/>
      * @return 是否有下一个 <code>TrackUnit</code>
      */
-    boolean hasNext(Storage storage, Collection<TrackUnit> units);
+    boolean hasNext(Storage storage, Collection<TrackUnit<Storage>> units);
 
     /**
      * @param storage 可能会用到
      * @param units 可能会用到
      * @return 下一个 <code>TrackUnit</code>
      */
-    TrackUnit next(Storage storage, Collection<TrackUnit> units);
+    TrackUnit<Storage> next(Storage storage, Collection<TrackUnit<Storage>> units);
 }
