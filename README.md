@@ -1,2 +1,2 @@
-# backtrack_framework
-A customizable framework for backtrack algorithm
+# backtrace-framework
+A customizable framework for backtrace algorithm
