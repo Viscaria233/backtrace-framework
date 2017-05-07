@@ -6,12 +6,12 @@ import com.backtraceframework.api.TraceUnit;
  * Created by Haochen on 2017/4/10.
  * TODO:
  */
-public class QueenTrackUnit implements TraceUnit<Integer[][]> {
+public class QueenTraceUnit implements TraceUnit<Integer[][]> {
 
     private int row;
     private int column = -1;
 
-    QueenTrackUnit(int row) {
+    QueenTraceUnit(int row) {
         this.row = row;
     }
 

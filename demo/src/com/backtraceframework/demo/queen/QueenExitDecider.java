@@ -1,6 +1,6 @@
-package com.backtrackframework.demo.queen;
+package com.backtraceframework.demo.queen;
 
-import com.backtrackframework.api.ExitDecider;
+import com.backtraceframework.api.ExitDecider;
 
 /**
  * Created by Haochen on 2017/4/10.

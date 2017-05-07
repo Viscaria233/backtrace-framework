@@ -1,8 +1,7 @@
-package com.backtrackframework.demo.queen;
+package com.backtraceframework.demo.queen;
 
-import com.backtrackframework.api.Storage;
-import com.backtrackframework.api.TrackUnit;
-import com.backtrackframework.api.TrackUnitIterator;
+import com.backtraceframework.api.TraceUnit;
+import com.backtraceframework.api.TraceUnitIterator;
 
 import java.util.Collection;
 
@@ -10,7 +9,7 @@ import java.util.Collection;
  * Created by Haochen on 2017/4/10.
  * TODO:
  */
-public class QueenIterator implements TrackUnitIterator {
+public class QueenIterator implements TraceUnitIterator<Integer[][]> {
     private int queenCount;
 
     QueenIterator(int queenCount) {
@@ -18,12 +17,12 @@ public class QueenIterator implements TrackUnitIterator {
     }
 
     @Override
-    public boolean hasNext(Storage storage, Collection<TrackUnit> units) {
+    public boolean hasNext(Integer[][] storage, Collection<TraceUnit<Integer[][]>> units) {
         return units.size() < queenCount;
     }
 
     @Override
-    public TrackUnit next(Storage storage, Collection<TrackUnit> units) {
-        return new QueenTrackUnit(units.size());
+    public TraceUnit<Integer[][]> next(Integer[][] storage, Collection<TraceUnit<Integer[][]>> units) {
+        return new QueenTraceUnit(units.size());
     }
 }
